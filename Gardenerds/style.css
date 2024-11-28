@@ -17,17 +17,20 @@ html,body{
 #left{
     width: 80%;
     height: 100%;
-    background-color: red;
 }
 #left #ltop{
     width: 100%;
     height: 70%;
-    background-color: rebeccapurple;
+    background-image: url("image.jpg");
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 #left #lbottom{
     width: 100%;
     height: 30%;
-    background-color: goldenrod;
+    background-color: #222;
 }
 #right{
     width: 20%;
@@ -37,10 +40,10 @@ html,body{
 #right #rtop{
     width: 100%;
     height: 70%;
-    background-color: greenyellow;
+    background-color: #fff;
 }
 #right #rbottom{
     width: 100%;
     height: 30%;
-    background-color: palevioletred;
+    background-color: #dadada;
 }
