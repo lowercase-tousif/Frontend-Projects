@@ -6,7 +6,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
     const renderTasks = (task) => {
-        console.log(task);
+        const li = document.createElement('li');
+        li.setAttribute('data-id',task.id);
+        if(task.completed){
+            li.classList.add('completed');
+        }
+        li.innerHTML = `
+        <span>${task.text}</span>
+        <button>Delete</button>`;
+        taskContainer.appendChild(li);
     }
 
     // rendering all the tasks
