@@ -22,6 +22,10 @@ addTaskBtn.addEventListener('click', () => {
     }
     tasks.push(taskObject);
     inputField.value = "";
-
+    saveTasks();
     console.log(tasks);
 })
+
+const saveTasks = () => {
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+}
