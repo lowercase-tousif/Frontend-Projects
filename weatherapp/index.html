@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App ☔☔</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="main">
+        <form id="input-form">
+            <input 
+                type="text" 
+                id="city-input" 
+                placeholder="Enter the city" 
+                aria-label="City input" 
+                required>
+            <button type="submit" id="get-weather">Get Weather</button>
+        </form>
+        <div id="weather-container" class="hidden">
+            <h4 class="city-name"></h4>
+            <p class="city-weather"></p>
+            <p class="city-desc"></p>
+        </div>
+        <span class="hidden" id="error-message">City Not Found. Enter a valid name</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
