@@ -5,51 +5,69 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
-    const renderTasks = (task) => {
+    // Save tasks to localStorage
+    const saveTasks = () => {
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    };
+
+    // Render a single task
+    const renderTask = (task) => {
         const li = document.createElement('li');
-        li.setAttribute('data-id',task.id);
-        if(task.completed){
+        li.className = 'task-item';
+        li.setAttribute('data-id', task.id);
+
+        if (task.completed) {
             li.classList.add('completed');
         }
+
         li.innerHTML = `
         <span>${task.text}</span>
-        <button>Delete</button>`;
+        <button class="delete-btn">Delete</button>`;
+
         taskContainer.appendChild(li);
 
-        // marking as done
+        // Mark task as completed when clicking on the text
         li.addEventListener('click', (e) => {
-            if(e.target.tagName === 'BUTTON') return;
-            task.completed = !task.completed;
-            li.classList.toggle('completed');
+            if (e.target.tagName === 'SPAN') { // Only mark if the text is clicked
+                task.completed = !task.completed;
+                li.classList.toggle('completed');
+                saveTasks();
+            }
+        });
+
+        // Delete task
+        li.querySelector('.delete-btn').addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent the parent <li> click event
+            tasks = tasks.filter((t) => t.id !== task.id);
+            li.remove();
             saveTasks();
-        })
-    }
+        });
+    };
 
-    // rendering all the tasks
-    tasks.forEach((task)=> renderTasks(task));
+    // Render all tasks
+    const renderTasks = () => {
+        taskContainer.innerHTML = ''; // Clear the task list before rendering
+        tasks.forEach((task) => renderTask(task));
+    };
 
+    // Add a new task
     addTaskBtn.addEventListener('click', () => {
-        const task = inputField.value.trim();
-        if (task === "") return;
+        const taskText = inputField.value.trim();
+        if (taskText === '') return;
 
-        // generating random id
-        const now = new Date();
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        const seconds = String(now.getSeconds()).padStart(2, '0');
-        const randId = `${hours}: ${minutes}: ${seconds}`;
-        // creating object for the task
         const taskObject = {
-            id: randId,
-            text: task,
+            id: Date.now().toString(), // Unique ID using timestamp
+            text: taskText,
             completed: false,
-        }
-        tasks.push(taskObject);
-        inputField.value = "";
-        saveTasks();
-    })
+        };
 
-    const saveTasks = () => {
-        localStorage.setItem('tasks', JSON.stringify(tasks))
-    }
-})
+        tasks.push(taskObject);
+        inputField.value = '';
+        renderTask(taskObject);
+        saveTasks();
+        inputField.focus(); // Focus back to the input field
+    });
+
+    // Initial render of tasks
+    renderTasks();
+});
