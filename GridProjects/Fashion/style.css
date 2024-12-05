@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Space Grotesk";
 }
 
 html, body{
@@ -21,10 +23,27 @@ html, body{
 }
 
 #left-top-left{
-    background-color: crimson;
+    padding: 30px;
+}
+
+#square{
+    width: 20px;
+    height: 20px;
+    background-color: black;
+    rotate: 45deg;
 }
 #left-top-right{
-   background-color: cadetblue;
+   justify-self: right;
+   padding: 30px;
+   text-align: right;   
+}
+#left-top-right h2{
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+#left-top-right h5{
+    font-size: 15px;
 }
 #left-center{
     background-color: royalblue;
